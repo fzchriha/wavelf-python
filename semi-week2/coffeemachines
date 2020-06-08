@@ -1,0 +1,133 @@
+#create a class, then convert all functions to a method
+
+water, milk, beans, dis_cups, money = 400, 540, 120, 9, 550
+
+class CoffeeMachine:
+    def __init__(self, water, milk, beans, disc_cups, money):
+        self.water = water
+        self.milk = milk
+        self.beans = beans
+        self.disc_cups = disc_cups
+        self.money = money
+        
+        
+    def info(self):
+        print("The coffee machine has:")
+        print(water, "of water")
+        print(milk, "of milk")
+        print(beans, "of coffee beans")
+        print(dis_cups, "of disposable cups")
+        print("$",money, "of money")
+        print()
+
+
+    def menu(self):
+        loop = True
+        while loop:
+            action = input("Write action (buy, fill, take, remaining, exit):\n")
+            print(action)
+            if action == "buy":
+                print()
+                self.buy()
+            elif action == "fill":
+                print()
+                self.fill()
+            elif action == "take":
+                print()
+                self.take()
+            elif action == "remaining":
+                print()
+                self.info()
+            elif action == "exit":
+                self.exit()
+
+            else:
+                print("Wrong action")
+
+
+    def check(self, water_, milk_, beans_, dis_cups_):
+        global water, milk, beans, dis_cups
+        sorry = "Sorry, not enough"
+        status = False
+        
+        if water <= water_:
+            print(sorry, "water!")
+            print()
+            self.menu()
+        elif milk <= milk_:
+            print(sorry, "milk!")
+            print()
+            self.menu()
+        elif beans <= beans_:
+            print(sorry, "coffee beans!")
+            print()
+            self.menu()
+        elif dis_cups <= dis_cups_:
+            print(sorry, "disposable cups!")
+            print()
+            self.menu()
+        else:
+            status = True
+        
+        return status
+        
+
+    def buy(self):
+        action = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:\n")
+        global water, milk, beans, dis_cups, money
+        ok_message = "I have enough resources, making you a coffee!"
+        
+        if action == "1":
+            if self.check(250, 0, 16, 1):            
+                water -= 250
+                milk -= 0
+                beans -= 16
+                dis_cups -= 1
+                money += 4
+                print(ok_message)
+        elif action == "2":
+            if self.check(350, 75, 20, 1):            
+                water -= 350
+                milk -= 75
+                beans -= 20
+                dis_cups -= 1
+                money += 7      
+                print(ok_message)
+        elif action == "3":
+            if self.check(350, 75, 20, 1):            
+                water -= 200
+                milk -= 100
+                beans -= 12
+                dis_cups -= 1
+                money += 6 
+                print(ok_message)
+        elif action == "back":
+            self.menu()
+        else:
+            print("Wrong action")
+            self.buy()
+            
+        print()
+        
+        
+    def fill(self):
+        global water, milk, beans, dis_cups, money
+        
+        water += int(input("Write how many ml of water do you want to add:\n"))
+        milk += int(input("Write how many ml of milk do you want to add:\n"))
+        beans += int(input("Write how many grams of coffee beans do you want to add:\n"))
+        dis_cups += int(input("Write how many disposable cups of coffee do you want to add:\n"))
+        print()
+        
+        
+    def take(self):
+        global money
+        print("I gave you $", money)
+        print()
+        money = 0
+    def exit(self):
+        exit()
+
+
+machine = CoffeeMachine(water, milk, beans, dis_cups, money)
+machine.menu() 
