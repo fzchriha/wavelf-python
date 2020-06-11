@@ -1,0 +1,12 @@
+animals = [camel, lion, deer, goose, bat, rabbit]
+
+# write your code here
+while True:
+   A = input('Which habitat # do you need? ')
+   if A != 'exit':
+      B=int(A)
+      print(animals[B])
+   elif A == 'exit':
+      print('See you!')
+      break
+   
