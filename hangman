@@ -1,0 +1,34 @@
+import random
+word = list(random.choice(['java', 'python', 'kotlin', 'javascript']))
+blank = list('-' * len(word))
+count = 0
+letters_used = []
+print('H A N G M A N')
+choice = str(input('Type "play" to play the game, "exit" to quit: '))
+if choice == 'play':
+    while count < 8:
+        print()
+        print("".join(blank))
+        guess = input('Input a letter: ')
+        if len(guess) != 1:
+            print("You should input a single letter")
+        elif not guess.islower():
+            print("It is not an ASCII lowercase letter")
+        elif guess in letters_used:
+            print('You already typed this letter')
+        elif guess in word:
+            for i in range(len(word)):
+                if word[i] == guess:
+                    blank[i] = guess
+        elif guess not in word:
+            print('No such letter in the word')
+            count += 1
+        letters_used.append(guess)
+if choice == 'exit':
+    exit()
+    
+
+if blank == word:
+    print("You survived!")
+else:
+    print('You are hanged!')
